@@ -44,35 +44,55 @@ class UserController {
     //     }
     // }
 
-    // async blockUser (req, res, next) {
-    //     try {
-    //         const { selectedIds } = req.body
-    //         const result = await UserService.block(selectedIds)
-    //         return res.json({ message: 'Users status updated', result })
-    //     } catch (e) {
-    //         next(e)
-    //     }
-    // }
+    async blockUser (req, res, next) {
+        try {
+            const { selectedIds } = req.body
+            const result = await UserService.block(selectedIds)
+            return res.json({ message: 'Users status updated', result })
+        } catch (e) {
+            next(e)
+        }
+    }
 
-    // async unblockUser (req, res, next) {
-    //     try {
-    //         const { selectedIds } = req.body
-    //         const result = await UserService.unblock(selectedIds)
-    //         return res.json({ message: 'Users status updated', result })
-    //     } catch (e) {
-    //         next(e)
-    //     }
-    // }
+    async unblockUser (req, res, next) {
+        try {
+            const { selectedIds } = req.body
+            const result = await UserService.unblock(selectedIds)
+            return res.json({ message: 'Users status updated', result })
+        } catch (e) {
+            next(e)
+        }
+    }
 
-    // async deleteUser (req, res, next) {
-    //     try {
-    //         const { selectedIds } = req.body
-    //         const result = await UserService.delete(selectedIds)
-    //         return res.json({ message: 'Users deleted successfully', result })
-    //     } catch (e) {
-    //         next(e)
-    //     }
-    // }
+    async deleteUser (req, res, next) {
+        try {
+            const { selectedIds } = req.body
+            const result = await UserService.delete(selectedIds)
+            return res.json({ message: 'Users deleted successfully', result })
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    async makeAdmin (req, res, next) {
+        try {
+            const { selectedIds } = req.body
+            const result = await UserService.admin(selectedIds)
+            return res.json({ message: 'Users are admin now!', result })
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    async unmakeAdmin (req, res, next) {
+        try {
+            const { selectedIds } = req.body
+            const result = await UserService.unAdmin(selectedIds)
+            return res.json({ message: 'Users are removed from admin!', result })
+        } catch (e) {
+            next(e)
+        }
+    }
 
     async getUsers(req, res, next) {
         try {

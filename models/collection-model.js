@@ -1,13 +1,13 @@
 import { Schema, model } from 'mongoose'
 
 const CollectionSchema = new Schema({
-    id: {type: String, required: true},
-    name: {type: String, required: true},
+    // id: {type: String, required: true},
+    title: {type: String, required: true},
     description: {type: String, required: true},
-    theme: {type: String, required: true},
+    topic: { type: Schema.Types.String, ref: 'CollectionTopic', required: true},
+    user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     image_url: {type: String},
-    user_id: {type: String, required: true},
-    category_id: {type: String, required: true},
+    category_id: {type: String},
     custom_string1_state: {type: Boolean, default: false},
     custom_string1_name: {type: String},
     custom_string2_state: {type: Boolean, default: false},

@@ -1,7 +1,9 @@
 class UserDto {
     constructor(model) {
-        this.email = model.email
         this.id = model._id
+        this.email = model.email
+        this.username = model.username
+        this.isAdmin = model.isAdmin
     }
 }
 

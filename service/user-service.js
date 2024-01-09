@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import mongoose from 'mongoose'
 
 import UserModel from '../models/user-model.js'
 import UserDto from '../dtos/user-dto.js'
@@ -6,7 +7,6 @@ import tokenService from './token-service.js'
 import ApiError from '../exceptions/api-error.js'
 
 class UserService {
-
     async generateAndSaveToken(user) {
         const userDto = new UserDto(user)
         const tokens = tokenService.generateAccessToken({ ...userDto })
@@ -70,17 +70,25 @@ class UserService {
         return await UserModel.find()
     }
 
-    // async delete(selectedIds) {
-    //     return await UserModel.deleteMany({ _id: { $in: selectedIds } })
-    // }
+    async delete(selectedIds) {
+        return await UserModel.deleteMany({ _id: { $in: selectedIds } })
+    }
 
-    // async block(selectedIds) {
-    //     return await UserModel.updateMany({ _id: { $in: selectedIds } }, {'$set':{'isBlocked': true}})
-    // }
+    async block(selectedIds) {
+        return await UserModel.updateMany({ _id: { $in: selectedIds } }, {'$set':{'isBlocked': true, 'isAdmin': false}})
+    }
 
-    // async unblock(selectedIds) {
-    //     return await UserModel.updateMany({ _id: { $in: selectedIds } }, {'$set':{'isBlocked': false}})
-    // }
+    async unblock(selectedIds) {
+        return await UserModel.updateMany({ _id: { $in: selectedIds } }, {'$set':{'isBlocked': false}})
+    }
+
+    async admin(selectedIds) {
+        return await UserModel.updateMany({ _id: { $in: selectedIds } }, {'$set':{'isAdmin': true, 'isBlocked': false}})
+    }
+
+    async unAdmin(selectedIds) {
+        return await UserModel.updateMany({ _id: { $in: selectedIds } }, {'$set':{'isAdmin': false}})
+    }
 }
 
 export default new UserService()

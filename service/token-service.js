@@ -13,14 +13,14 @@ class TokenService {
         }
     }
 
-    // validateAccessToken(token) {
-    //     try {
-    //         const userData = jwt.verify(token, process.env.JWT_ACCESS_TOKEN)
-    //         return userData
-    //     } catch (e) {
-    //         return null
-    //     }
-    // }
+    validateAccessToken(token) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_ACCESS_TOKEN)
+            return userData
+        } catch (e) {
+            return null
+        }
+    }
 
     // validateRefreshToken(token) {
     //     try {
