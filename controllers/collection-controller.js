@@ -31,6 +31,17 @@ class CollectionController {
         }
     }
 
+    async getLast(req, res, next) {
+        try {
+            const collections = await CollectionService.getLastCollections()
+
+            res.json(collections)
+        } catch (e) {
+            console.error('>>>Error: ', e)
+            next(e)
+        }
+    }
+
     async getOne(req, res, next) {
         try {
             const collectionId = req.params.id

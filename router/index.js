@@ -18,6 +18,7 @@ router.post('/unadmin', UserController.unmakeAdmin)
 router.get('/users', authMiddleware, UserController.getUsers)
 
 router.get('/collections', CollectionController.getAll)
+router.get('/collections-last', CollectionController.getLast)
 router.get('/collection/:id', CollectionController.getOne)
 router.post('/collection', CollectionController.create)
 // router.delete('/collections', CollectionController.remove)

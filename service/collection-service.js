@@ -5,6 +5,10 @@ class UserService {
         return await CollectionModel.find()
     }
 
+    async getLastCollections() {
+        return await CollectionModel.find().sort({ _id: -1 }).limit(10)
+    }
+
     async getOneCollection(collectionId) {
         try {
             return await CollectionModel.findById(collectionId)
