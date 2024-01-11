@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt'
-import mongoose from 'mongoose'
 
 import UserModel from '../models/user-model.js'
 import UserDto from '../dtos/user-dto.js'

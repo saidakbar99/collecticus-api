@@ -1,10 +1,11 @@
 import { Schema, model } from 'mongoose'
 
 const CollectionSchema = new Schema({
-    // id: {type: String, required: true},
+    // _id: {type: Schema.Types.ObjectId, required: true},
     title: {type: String, required: true},
     description: {type: String, required: true},
     topic: { type: Schema.Types.String, ref: 'CollectionTopic', required: true},
+    category: { type: String},
     user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     image_url: {type: String},
     category_id: {type: String},
