@@ -20,7 +20,9 @@ router.get('/users', authMiddleware, UserController.getUsers)
 router.get('/collections', CollectionController.getAll)
 router.get('/collections-last', CollectionController.getLast)
 router.get('/collection/:id', CollectionController.getOne)
+router.get('/collections/:id', CollectionController.getUserAll)
 router.post('/collection', CollectionController.create)
+
 // router.delete('/collections', CollectionController.remove)
 // router.patch('/collections', CollectionController.update)
 

@@ -17,6 +17,16 @@ class UserService {
             throw error;
         }
     }
+
+    async getUserCollections(userId) {
+        try {
+            return await CollectionModel.find({ 'user.id': userId })
+            // return await CollectionModel.findById(userId)
+        } catch (e) {
+            console.error(`Error in getUserCollections`);
+            throw error;
+        }
+    }
 }
 
 export default new UserService()

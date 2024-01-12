@@ -53,6 +53,18 @@ class CollectionController {
             next(e)
         }
     }
+
+    async getUserAll(req, res, next) {
+        try {
+            const userId = req.params.id
+            const collections = await CollectionService.getUserCollections(userId)
+
+            res.json(collections)
+        } catch (e) {
+            console.error('>>>Error1: ', e)
+            next(e)
+        }
+    }
 }
 
 export default new CollectionController()
