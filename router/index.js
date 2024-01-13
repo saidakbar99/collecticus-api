@@ -2,9 +2,9 @@ import { Router } from 'express';
 
 import UserController from '../controllers/user-controller.js';
 import CollectionController from '../controllers/collection-controller.js';
+import ItemController from '../controllers/item-controller.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 const router = Router();
-// const authMiddleware = require('../middleware/authMiddleware')
 
 //! vvv sdelat' best practise kak v collections vvv
 router.post('/registration', UserController.registration)
@@ -21,10 +21,9 @@ router.get('/collections', CollectionController.getAll)
 router.get('/collections-last', CollectionController.getLast)
 router.get('/collection/:id', CollectionController.getOne)
 router.get('/collections/:id', CollectionController.getUserAll)
-router.post('/collection', CollectionController.create)
+router.post('/collection', CollectionController.createCollection)
 
-// router.delete('/collections', CollectionController.remove)
-// router.patch('/collections', CollectionController.update)
+router.post('/item', ItemController.addItemToCollection)
 
 //! VVV error s /refresh VVV
 // router.get('/refresh', UserController.refresh)

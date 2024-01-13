@@ -1,5 +1,11 @@
 import { Schema, model } from 'mongoose'
 
+const ItemSchema = new Schema({
+    name: {type: String, unique: true, required: true},
+    tags: {type: String, required: true},
+    createdAt: {type: Date, default: Date.now},
+})
+
 const CollectionSchema = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
@@ -10,8 +16,10 @@ const CollectionSchema = new Schema({
         isAdmin: {type: Boolean, required: true},
         id: {type: Schema.Types.ObjectId, required: true}
     },
+    createdAt: {type: Date, default: Date.now},
     image_url: {type: String},
     category_id: {type: String},
+    items: [ItemSchema],
     custom_string1_state: {type: Boolean, default: false},
     custom_string1_name: {type: String},
     custom_string2_state: {type: Boolean, default: false},

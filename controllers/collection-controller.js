@@ -2,7 +2,7 @@ import CollectionModel from "../models/collection-model.js"
 import CollectionService from "../service/collection-service.js"
 
 class CollectionController {
-    async create(req, res, next) {
+    async createCollection(req, res, next) {
         try {
             const doc = new CollectionModel({
                 title: req.body.collection.title,
