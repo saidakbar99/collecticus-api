@@ -21,7 +21,7 @@ router.get('/collections', CollectionController.getAll)
 router.get('/collections-last', CollectionController.getLast)
 router.get('/collection/:id', CollectionController.getOne)
 router.get('/collections/:id', CollectionController.getUserAll)
-router.post('/collection', CollectionController.createCollection)
+router.post('/collection', authMiddleware, CollectionController.createCollection)
 
 router.post('/item', ItemController.addItemToCollection)
 
