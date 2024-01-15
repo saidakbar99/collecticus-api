@@ -65,6 +65,29 @@ class CollectionController {
             next(e)
         }
     }
+
+    async deleteCollections(req, res, next) {
+        try {
+            const { selectedCollections } = req.body
+            const collections = await CollectionService.deleteSelectedCollections(selectedCollections)
+
+            res.json(collections)
+        } catch (error) {
+            console.error('>>>Error1: ', e)
+            next(e)
+        }
+    }
+
+    async getTopCollections(req, res, next) {
+        try {
+            const collections = await CollectionService.getBiggestCollections()
+
+            res.json(collections)
+        } catch (e) {
+            console.error('Error fetching biggest collections:', e);
+            next(e)
+        }
+      }
 }
 
 export default new CollectionController()

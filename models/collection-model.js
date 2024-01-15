@@ -4,6 +4,7 @@ const ItemSchema = new Schema({
     name: {type: String, unique: true, required: true},
     tags: {type: String, required: true},
     createdAt: {type: Date, default: Date.now},
+    updatedAt: {type: Date, default: Date.now}
 })
 
 const CollectionSchema = new Schema({

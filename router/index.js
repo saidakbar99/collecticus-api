@@ -18,12 +18,15 @@ router.post('/unadmin', UserController.unmakeAdmin)
 router.get('/users', authMiddleware, UserController.getUsers)
 
 router.get('/collections', CollectionController.getAll)
-router.get('/collections-last', CollectionController.getLast)
+router.get('/collections/top', CollectionController.getTopCollections)
+router.get('/collections/last', CollectionController.getLast)
 router.get('/collection/:id', CollectionController.getOne)
 router.get('/collections/:id', CollectionController.getUserAll)
-router.post('/collection', authMiddleware, CollectionController.createCollection)
+router.post('/collections/remove', CollectionController.deleteCollections)
+router.post('/collection', CollectionController.createCollection)
 
 router.post('/item', ItemController.addItemToCollection)
+router.patch('/item', ItemController.editItem)
 
 //! VVV error s /refresh VVV
 // router.get('/refresh', UserController.refresh)
