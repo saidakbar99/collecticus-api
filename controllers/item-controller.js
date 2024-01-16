@@ -39,6 +39,20 @@ class ItemController {
             next(e)
         }
     }
+
+    async deleteItems(req, res, next) {
+        try {
+            const { selectedItems, collectionId } = req.body
+            const collection = await CollectionModel.findById(collectionId)
+            collection.items = collection.items.filter(item => !selectedItems.includes(item._id.toString()))
+            const updatedCollection = await collection.save();
+
+            res.json(updatedCollection)
+        } catch (e) {
+            console.error('>>>Error: ', e)
+            next(e)
+        }
+    }
 }
 
 export default new ItemController()
