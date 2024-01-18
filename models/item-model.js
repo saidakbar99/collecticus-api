@@ -48,7 +48,7 @@ const EmptyCollectionSchema = new Schema({
 
 const ItemSchema = new Schema({
     name: {type: String, unique: true, required: true},
-    tags: {type: String, required: true},
+    tags: [{type: String, required: true}],
     lastUpdate: {type: Date, default: Date.now},
     parentCollection: {type: EmptyCollectionSchema}
 })

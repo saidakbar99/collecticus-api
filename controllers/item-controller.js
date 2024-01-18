@@ -11,11 +11,7 @@ class ItemController {
                 return res.status(404).json({ error: 'Collection not found' })
             }
 
-            console.log('>>>item', item)
-
             const globalItem = await ItemModel.create(item)
-            console.log('>>>globalItem', globalItem)
-
             collection.items.push(globalItem)
             const updatedCollection = await collection.save()
 
@@ -27,19 +23,30 @@ class ItemController {
     }
 
     async editItem(req, res, next) {
+        //! edit is not updating ItemModel item after second change !//
         try {
-            const { updatedItem, collectionId, itemId } = req.body
-            const collection = await CollectionModel.findById(collectionId)
-            const itemIndex = collection.items.findIndex(item => item._id == itemId)
+            const { updatedItem, collectionId, itemId } = req.body;
+            const collection = await CollectionModel.findById(collectionId);
+            // let item = await ItemModel.findById(itemId);
+            // console.log('>>>item', item)
+            const itemIndex = collection.items.findIndex(item => item._id == itemId);
 
             if (!collection || itemIndex === -1) {
-                return res.status(404).json({ error: 'Collection or Item not found' })
+                return res.status(404).json({ error: 'Collection or Item not found' });
             }
 
-            collection.items[itemIndex] = updatedItem
-            const updatedCollection = await collection.save()
+            collection.items[itemIndex] = updatedItem;
+            // item = updatedItem
+            // const updatedItemModel = await item.save()
+            const updatedCollection = await collection.save();
 
-            res.json(updatedCollection)
+            const updatedItemModel = await ItemModel.findOneAndUpdate(
+                { _id: itemId },
+                { $set: updatedItem },
+                { new: true }
+            )
+
+            res.json({ updatedCollection, updatedItemModel });
         } catch (e) {
             console.error('>>>Error: ', e)
             next(e)
