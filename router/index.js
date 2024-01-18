@@ -28,6 +28,7 @@ router.post('/collection', CollectionController.createCollection)
 router.post('/item', ItemController.addItemToCollection)
 router.patch('/item', ItemController.editItem)
 router.delete('/item', ItemController.deleteItems)
+router.get('/item/last', ItemController.getLastItems)
 
 //! VVV error s /refresh VVV
 // router.get('/refresh', UserController.refresh)

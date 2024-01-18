@@ -8,7 +8,8 @@ class CollectionController {
                 title: req.body.collection.title,
                 description: req.body.collection.description,
                 topic: req.body.collection.topic,
-                user: req.body.collection.user
+                user: req.body.collection.user,
+                image_url: req.body.collection.image_url
             })
 
             const collection = await doc.save()

@@ -1,4 +1,5 @@
 import CollectionModel from "../models/collection-model.js"
+import ItemModel from "../models/item-model.js"
 
 class ItemController {
     async addItemToCollection(req, res, next) {
@@ -10,7 +11,12 @@ class ItemController {
                 return res.status(404).json({ error: 'Collection not found' })
             }
 
-            collection.items.push(item)
+            console.log('>>>item', item)
+
+            const globalItem = await ItemModel.create(item)
+            console.log('>>>globalItem', globalItem)
+
+            collection.items.push(globalItem)
             const updatedCollection = await collection.save()
 
             res.json(updatedCollection)
@@ -47,7 +53,22 @@ class ItemController {
             collection.items = collection.items.filter(item => !selectedItems.includes(item._id.toString()))
             const updatedCollection = await collection.save();
 
-            res.json(updatedCollection)
+            const deletedItems = await ItemModel.deleteMany({ _id: { $in: selectedItems } })
+
+            res.json({updatedCollection, deletedItems})
+        } catch (e) {
+            console.error('>>>Error: ', e)
+            next(e)
+        }
+    }
+
+    async getLastItems(req, res, next) {
+        try {
+            const items = await ItemModel.find()
+                .sort({ lastUpdate: -1 })
+                .limit(10)
+
+            res.json(items)
         } catch (e) {
             console.error('>>>Error: ', e)
             next(e)

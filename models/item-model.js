@@ -1,8 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-import ItemModel from './item-model.js'
-
-const CollectionSchema = new Schema({
+const EmptyCollectionSchema = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
     topic: {type: String, required: true},
@@ -10,7 +8,7 @@ const CollectionSchema = new Schema({
     createdAt: {type: Date, default: Date.now},
     image_url: {type: String},
     category_id: {type: String},
-    items: [ItemModel.schema],
+    items: [],
     custom_string1_state: {type: Boolean, default: false},
     custom_string1_name: {type: String},
     custom_string2_state: {type: Boolean, default: false},
@@ -48,4 +46,11 @@ const CollectionSchema = new Schema({
     },
 })
 
-export default model('Collection', CollectionSchema)
+const ItemSchema = new Schema({
+    name: {type: String, unique: true, required: true},
+    tags: {type: String, required: true},
+    lastUpdate: {type: Date, default: Date.now},
+    parentCollection: {type: EmptyCollectionSchema}
+})
+
+export default model('Item', ItemSchema)
