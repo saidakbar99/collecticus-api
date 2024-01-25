@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose'
-import mexp from 'mongoose-elasticsearch-xp';
 
 const EmptyCollectionSchema = new Schema({
     title: {type: String, required: true},
@@ -31,12 +30,6 @@ const ItemSchema = new Schema({
     parentCollection: {type: EmptyCollectionSchema},
     extraFields: [ExtraFieldSchema]
 })
-
-ItemSchema.plugin(mexp, {
-    host: 'localhost',
-    port: 9200,
-    index: 'default'
-  });
 
 const ItemModel = model('Item', ItemSchema);
 

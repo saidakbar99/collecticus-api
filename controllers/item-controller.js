@@ -1,6 +1,5 @@
 import CollectionModel from "../models/collection-model.js"
 import ItemModel from "../models/item-model.js"
-// import TagModel from "../models/tag-model.js"
 
 class ItemController {
     async addItemToCollection(req, res, next) {
@@ -24,12 +23,9 @@ class ItemController {
     }
 
     async editItem(req, res, next) {
-        //! edit is not updating ItemModel item after second change !//
         try {
             const { updatedItem, collectionId, itemId } = req.body;
-            // console.log('>>>', updatedItem)
             const collection = await CollectionModel.findById(collectionId);
-            // const item = await ItemModel.findById(itemId);
             const itemIndex = collection.items.findIndex(item => item._id == itemId);
 
             if (!collection || itemIndex === -1) {
@@ -37,21 +33,8 @@ class ItemController {
             }
 
             collection.items[itemIndex].set(updatedItem)
-            const updatedItemModel = await ItemModel.findByIdAndUpdate(itemId, updatedItem, {
-                new: true, // Return the modified document
-            });
-            // Object.assign(item, updatedItem)
-            // item._id = itemId
-
-            // const updatedItemModel = await item.save()
-            // console.log('>>>2', updatedItemModel)
+            const updatedItemModel = await ItemModel.findByIdAndUpdate(itemId, updatedItem, { new: true })
             const updatedCollection = await collection.save();
-
-            // const updatedItemModel = await ItemModel.findOneAndUpdate(
-            //     { _id: itemId },
-            //     { $set: updatedItem },
-            //     // { new: true }
-            // )
 
             res.json({ updatedCollection, updatedItemModel });
         } catch (e) {

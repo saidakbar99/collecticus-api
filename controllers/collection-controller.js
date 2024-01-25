@@ -1,5 +1,5 @@
-import CollectionModel from "../models/collection-model.js"
-import CollectionService from "../service/collection-service.js"
+import CollectionModel from '../models/collection-model.js'
+import CollectionService from '../service/collection-service.js'
 
 class CollectionController {
     async createCollection(req, res, next) {
@@ -12,7 +12,6 @@ class CollectionController {
                 image_url: req.body.collection.image_url,
                 extraFields: req.body.collection.extraFields
             })
-            console.log('>>>', req.body.collection.extraFields)
 
             const collection = await doc.save()
 

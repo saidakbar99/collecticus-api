@@ -6,7 +6,6 @@ import ItemController from '../controllers/item-controller.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 const router = Router();
 
-//! vvv sdelat' best practise kak v collections vvv
 router.post('/registration', UserController.registration)
 router.post('/login', UserController.login)
 router.post('/logout', UserController.logout)
@@ -29,8 +28,5 @@ router.patch('/item', ItemController.editItem)
 router.delete('/item', ItemController.deleteItems)
 router.get('/item/last', ItemController.getLastItems)
 router.get('/item/:id', ItemController.getItem)
-
-//! VVV error s /refresh VVV
-// router.get('/refresh', UserController.refresh)
 
 export default router
