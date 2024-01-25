@@ -17,7 +17,6 @@ router.post('/admin', UserController.makeAdmin)
 router.post('/unadmin', UserController.unmakeAdmin)
 router.get('/users', authMiddleware, UserController.getUsers)
 
-router.get('/collections', CollectionController.getAll)
 router.get('/collections/top', CollectionController.getTopCollections)
 router.get('/collections/last', CollectionController.getLast)
 router.get('/collection/:id', CollectionController.getOne)
@@ -29,6 +28,7 @@ router.post('/item', ItemController.addItemToCollection)
 router.patch('/item', ItemController.editItem)
 router.delete('/item', ItemController.deleteItems)
 router.get('/item/last', ItemController.getLastItems)
+router.get('/item/:id', ItemController.getItem)
 
 //! VVV error s /refresh VVV
 // router.get('/refresh', UserController.refresh)

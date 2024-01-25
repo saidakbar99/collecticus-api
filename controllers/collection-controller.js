@@ -9,8 +9,10 @@ class CollectionController {
                 description: req.body.collection.description,
                 topic: req.body.collection.topic,
                 user: req.body.collection.user,
-                image_url: req.body.collection.image_url
+                image_url: req.body.collection.image_url,
+                extraFields: req.body.collection.extraFields
             })
+            console.log('>>>', req.body.collection.extraFields)
 
             const collection = await doc.save()
 
