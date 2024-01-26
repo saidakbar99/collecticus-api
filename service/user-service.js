@@ -32,7 +32,7 @@ class UserService {
         const isPassEquals = await bcrypt.compare(password, user.password)
 
         if (!user || !isPassEquals) {
-            throw ApiError.BadRequest('Wrong username/password')
+            throw ApiError.UnauthorizedError('Wrong username/password')
         }
 
         if (user.isBlocked) {
